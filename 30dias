@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto 30 Dias | LilVieira</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Paytone+One&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #f472b6;
+      --purple: #a78bfa;
+      --blue: #5caedd;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(160deg, #b39ddb 0%, #ce93d8 25%, #f48fb1 60%, #ffb6c1 100%);
+      min-height: 100vh;
+      color: white;
+    }
+
+    /* ── TELA DE SENHA ── */
+    #lock-screen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(160deg, #b39ddb 0%, #ce93d8 25%, #f48fb1 60%, #ffb6c1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 1.5rem;
+    }
+
+    .lock-box {
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .lock-box .logo {
+      font-family: 'Paytone One', sans-serif;
+      font-size: 38px;
+      line-height: 1;
+      -webkit-text-stroke: 2px white;
+      color: transparent;
+      display: block;
+    }
+
+    .lock-box .logo span {
+      display: block;
+      font-size: 48px;
+      color: white;
+      -webkit-text-stroke: 0;
+      text-shadow: 3px 3px 0 rgba(180,80,180,0.4);
+    }
+
+    .lock-box h2 {
+      font-size: 16px;
+      font-weight: 800;
+      margin: 1.2rem 0 0.4rem;
+      color: white;
+    }
+
+    .lock-box p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 1.5rem;
+    }
+
+    .lock-input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 15px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    .lock-input::placeholder { color: rgba(255,255,255,0.6); }
+
+    .lock-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 50px;
+      border: none;
+      background: white;
+      color: #a21caf;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .lock-btn:hover { transform: scale(1.03); }
+
+    .lock-error {
+      font-size: 13px;
+      color: #fff;
+      background: rgba(220,0,80,0.4);
+      border-radius: 20px;
+      padding: 6px 14px;
+      margin-top: 0.8rem;
+      display: none;
+    }
+
+    /* ── CONTEÚDO ── */
+    #content { display: none; }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem;
+    }
+
+    .logo {
+      font-family: 'Paytone One', sans-serif;
+      font-size: clamp(42px, 10vw, 72px);
+      line-height: 1;
+      -webkit-text-stroke: 3px white;
+      color: transparent;
+      text-shadow: 4px 4px 0px rgba(255,255,255,0.3);
+      display: block;
+    }
+
+    .logo span {
+      display: block;
+      font-size: clamp(52px, 12vw, 90px);
+      color: white;
+      -webkit-text-stroke: 0;
+      text-shadow: 3px 3px 0 rgba(180,80,180,0.4), 0 0 30px rgba(255,255,255,0.3);
+    }
+
+    .handle {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(20px, 4vw, 30px);
+      font-weight: 900;
+      color: white;
+      max-width: 560px;
+      margin: 0 auto 1.2rem;
+      line-height: 1.3;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.9);
+      max-width: 420px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .divider {
+      width: 80%;
+      max-width: 700px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      margin: 2.5rem auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(16px, 3vw, 22px);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 2rem;
+    }
+
+    /* ── BENEFITS ── */
+    .benefits {
+      padding: 0 1.5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .benefit-card {
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 18px;
+      padding: 1.5rem 1.2rem;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .benefit-card:hover { transform: translateY(-4px); }
+    .benefit-icon { font-size: 36px; margin-bottom: 0.7rem; display: block; }
+    .benefit-card h3 { font-size: 15px; font-weight: 800; margin-bottom: 0.4rem; }
+    .benefit-card p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.6; }
+
+    /* ── TREINOS ── */
+    .treinos {
+      padding: 0 1.5rem 2.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .treinos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .treino-card {
+      background: var(--blue);
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 16px;
+      padding: 1.3rem 1rem;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .treino-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .treino-card .icon { font-size: 28px; }
+    .treino-card .label {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+    }
+
+    .treino-card.rosa {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+    }
+
+    /* linha do guia — 2 cards lado a lado centralizados */
+    .guia-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    /* ── SOBRE ── */
+    .sobre {
+      padding: 0 1.5rem 3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .sobre-box {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 24px;
+      padding: 2rem 1.8rem;
+    }
+
+    .sobre-greeting { font-size: 22px; margin-bottom: 0.8rem; }
+
+    .sobre-box p {
+      font-size: 14px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 1rem;
+    }
+
+    .sobre-box p:last-child { margin-bottom: 0; }
+
+    .sobre-name {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 1.2rem;
+      color: white;
+    }
+
+    .fotos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 1.5rem 0;
+    }
+
+    .fotos-grid img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    /* ── FAQ ── */
+    .faq-section {
+      padding: 0 1.5rem 3rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .faq-item {
+      background: var(--blue);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .faq-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      text-align: left;
+      color: white;
+      font-size: 15px;
+      font-weight: 800;
+      font-family: 'Nunito', sans-serif;
+      gap: 12px;
+    }
+
+    .faq-btn:hover { background: rgba(255,255,255,0.08); }
+
+    .faq-arrow { font-size: 16px; transition: transform 0.25s; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+    .faq-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s;
+      font-size: 14px;
+      color: rgba(255,255,255,0.93);
+      line-height: 1.7;
+      padding: 0 20px;
+    }
+
+    .faq-item.open .faq-body { max-height: 200px; padding: 0 20px 16px; }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    footer a { color: white; font-weight: 700; text-decoration: none; }
+
+    @media (max-width: 500px) {
+      .treinos-grid { grid-template-columns: repeat(2, 1fr); }
+      .fotos-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TELA DE SENHA -->
+  <div id="lock-screen">
+    <div class="lock-box">
+      <span class="logo">PROJETO 3D<span>30 DIAS</span></span>
+      <h2>Área exclusiva</h2>
+      <p>Digite a senha para acessar o seu conteúdo ♡</p>
+      <input class="lock-input" type="password" id="senha-input" placeholder="Digite sua senha" onkeydown="if(event.key==='Enter') verificar()">
+      <button class="lock-btn" onclick="verificar()">Entrar</button>
+      <div class="lock-error" id="erro-msg">Senha incorreta. Tente novamente.</div>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div id="content">
+
+    <section class="hero">
+      <span class="logo">PROJETO 3D<span>30 DIAS</span></span>
+      <p class="handle">@lilvieira</p>
+      <h1 class="hero-title">Até quando você vai procrastinar sua vida dos sonhos?</h1>
+      <p class="hero-sub">Chegou a hora de você se desafiar, sair da zona de conforto, deixar para trás a procrastinação e dar as boas-vindas para a sua melhor versão!</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="benefits">
+      <p class="section-title">O que você ganhará com este desafio?</p>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <span class="benefit-icon">💪</span>
+          <h3>Hábitos que funcionam</h3>
+          <p>Você vai aprender a criar hábitos que realmente funcionam, conquistando mais energia e disciplina.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">🌟</span>
+          <h3>Crescimento diário</h3>
+          <p>Cada pequena meta é um passo para o seu crescimento. Você vai descobrir do que é capaz e evoluir a cada dia.</p>
+        </div>
+        <div class="benefit-card">
+          <span class="benefit-icon">✨</span>
+          <h3>Sua melhor versão</h3>
+          <p>Esse é o momento de investir em si mesma, desbloquear seu potencial e caminhar rumo à sua melhor versão.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="treinos">
+      <p class="section-title">Acesse seu conteúdo</p>
+
+      <div class="treinos-grid">
+        <a class="treino-card" href="https://projeto30diaslilvieira.notion.site/Iniciante-27ae05a690be809da3c9c829634e7aea" target="_blank">
+          <span class="icon">🏃‍♀️</span>
+          <span class="label">Treino Iniciante</span>
+        </a>
+        <a class="treino-card" href="https://projeto30diaslilvieira.notion.site/Intermedi-rio-27ae05a690be8054858df4a8ffb476a2" target="_blank">
+          <span class="icon">🔥</span>
+          <span class="label">Treino Intermediário</span>
+        </a>
+        <a class="treino-card" href="https://projeto30diaslilvieira.notion.site/Avan-ado-27ae05a690be8091a93dd71bab6ddd3d" target="_blank">
+          <span class="icon">⚡</span>
+          <span class="label">Treino Avançado</span>
+        </a>
+        <a class="treino-card rosa" href="https://projeto30diaslilvieira.notion.site/Seu-espa-o-279e05a690be80368ecac1114a84b9fd" target="_blank">
+          <span class="icon">🌸</span>
+          <span class="label">Seu Espaço</span>
+        </a>
+        <a class="treino-card rosa" href="https://projeto30diaslilvieira.notion.site/Desafio-Glow-up-em-30-dias-279e05a690be80cea690ce86b90bd1a9" target="_blank">
+          <span class="icon">💎</span>
+          <span class="label">Desafio Glow Up</span>
+        </a>
+        <a class="treino-card rosa" href="https://projeto30diaslilvieira.notion.site/GUIA-27ae05a690be8083a940d4e1d106e862" target="_blank">
+          <span class="icon">📖</span>
+          <span class="label">Guia Completo</span>
+        </a>
+      </div>
+
+      <div class="guia-row">
+        <a class="treino-card" href="https://projeto30diaslilvieira.notion.site/Exerc-cios-Card-pio-279e05a690be81fbb743d7d7659715b2" target="_blank">
+          <span class="icon">🥗</span>
+          <span class="label">Receitas</span>
+        </a>
+        <a class="treino-card" href="https://projeto30diaslilvieira.notion.site/H-bitos-279e05a690be81aea160cd2e2e41093c" target="_blank">
+          <span class="icon">✅</span>
+          <span class="label">Hábitos</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="sobre">
+      <p class="section-title">Sobre mim</p>
+      <div class="sobre-box">
+        <p class="sobre-greeting">Oi, diva! ♡</p>
+
+        <div class="fotos-grid">
+          <img src="IMG_20240724_214110.jpg" alt="Larissa na academia">
+          <img src="IMG_6855.jpg" alt="Larissa na academia">
+          <img src="IMG_20240725_215315.jpg" alt="Larissa na academia">
+        </div>
+
+        <p>Eu sou Larissa Vieira, criadora de conteúdo fitness e treinadora esportiva em formação. Meu trabalho gira em torno da autenticidade, da estética e, principalmente, da conexão real com o público.</p>
+        <p>Sempre acreditei que o universo fitness vai muito além de treinos e alimentação — trata-se de cuidar de si mesma, fortalecer sua autoconfiança e encontrar prazer nesse processo.</p>
+        <p>Foi com esse pensamento que nasceu a minha missão: usar a minha influência para inspirar e ajudar pessoas a transformarem suas rotinas com leveza e consistência.</p>
+        <p>Para dar o primeiro passo, criei este projeto de 30 dias com o objetivo de formar um novo hábito. Bem-vinda ao seu novo começo.</p>
+        <p class="sobre-name">LILVIEIRA</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="faq-section">
+      <p class="section-title">Perguntas frequentes</p>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>Preciso treinar todos os dias?</span>
+            <span class="faq-arrow">&#8964;</span>
+          </button>
+          <div class="faq-body">Não! O método é flexível e respeita sua rotina.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>É só pra quem já treina?</span>
+            <span class="faq-arrow">&#8964;</span>
+          </button>
+          <div class="faq-body">Não! Tem trilhas desde o nível iniciante até o avançado.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>Preciso cortar pão, chocolate ou sair com amigos?</span>
+            <span class="faq-arrow">&#8964;</span>
+          </button>
+          <div class="faq-body">Nunca. O método ensina equilíbrio e liberdade alimentar com resultado.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>É tipo academia online?</span>
+            <span class="faq-arrow">&#8964;</span>
+          </button>
+          <div class="faq-body">Não. É um plano completo com nutrição, treino, mentalidade e suporte — feito pra quem quer mudança visível e leve.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span>Tem garantia?</span>
+            <span class="faq-arrow">&#8964;</span>
+          </button>
+          <div class="faq-body">Sim! Oferecemos garantia de satisfação.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <a href="https://instagram.com/lilvieira" target="_blank">@lilvieira</a> · Projeto 30 Dias
+    </footer>
+
+  </div>
+
+  <script>
+    function verificar() {
+      const senha = document.getElementById('senha-input').value;
+      if (senha === 'Diva*123*aviD') {
+        document.getElementById('lock-screen').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+      } else {
+        const erro = document.getElementById('erro-msg');
+        erro.style.display = 'block';
+        document.getElementById('senha-input').value = '';
+        setTimeout(() => { erro.style.display = 'none'; }, 3000);
+      }
+    }
+
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
