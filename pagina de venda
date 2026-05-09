@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto 30 Dias | LilVieira</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Paytone+One&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --grad: linear-gradient(160deg, #b39ddb 0%, #ce93d8 25%, #f48fb1 60%, #ffb6c1 100%);
+      --blue: #5caedd;
+      --purple: #a855f7;
+      --pink: #ec4899;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--grad);
+      min-height: 100vh;
+      color: white;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 3rem 1.5rem 2rem;
+    }
+
+    .logo {
+      font-family: 'Paytone One', sans-serif;
+      font-size: clamp(40px, 10vw, 70px);
+      line-height: 1;
+      -webkit-text-stroke: 3px white;
+      color: transparent;
+      display: block;
+    }
+
+    .logo span {
+      display: block;
+      font-size: clamp(50px, 12vw, 88px);
+      color: white;
+      -webkit-text-stroke: 0;
+      text-shadow: 3px 3px 0 rgba(180,80,180,0.4);
+    }
+
+    .handle {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.85);
+      margin: 0.5rem 0 1.8rem;
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .hero-title {
+      font-size: clamp(22px, 5vw, 36px);
+      font-weight: 900;
+      max-width: 620px;
+      margin: 0 auto 1rem;
+      line-height: 1.25;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.9);
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      line-height: 1.75;
+    }
+
+    /* ── CONTADOR ── */
+    .countdown-wrap {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 1.2rem 1.5rem;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+
+    .countdown-label {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 0.6rem;
+    }
+
+    .countdown-boxes {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cd-box {
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 10px 14px;
+      min-width: 58px;
+      text-align: center;
+    }
+
+    .cd-num {
+      font-size: 28px;
+      font-weight: 900;
+      display: block;
+      line-height: 1;
+    }
+
+    .cd-unit {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .cd-sep { font-size: 24px; font-weight: 900; opacity: 0.6; }
+
+    /* ── CTA PRINCIPAL ── */
+    .cta-section {
+      text-align: center;
+      padding: 0 1.5rem 1rem;
+    }
+
+    .price-old {
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      text-decoration: line-through;
+      margin-bottom: 0.2rem;
+    }
+
+    .price-new {
+      font-size: clamp(36px, 8vw, 56px);
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 2px 16px rgba(100,0,180,0.3);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .price-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-comprar {
+      display: inline-block;
+      background: white;
+      color: #a21caf;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      padding: 16px 48px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+      transition: transform 0.15s, box-shadow 0.15s;
+      border: none;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+    }
+
+    .btn-comprar:hover {
+      transform: scale(1.04);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.25);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
+      50% { box-shadow: 0 6px 36px rgba(168,85,247,0.5); }
+    }
+
+    .garantia-txt {
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      margin-top: 0.8rem;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 80%;
+      max-width: 700px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      margin: 2.5rem auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(16px, 3vw, 22px);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    /* ── PARA QUEM É ── */
+    .para-quem {
+      padding: 0 1.5rem;
+      max-width: 700px;
+      margin: 0 auto 0;
+    }
+
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .check-item .emoji { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── O QUE VOCÊ RECEBE ── */
+    .recebe {
+      padding: 0 1.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .recebe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+
+    .recebe-card {
+      background: var(--blue);
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 16px;
+      padding: 1.4rem 1rem;
+      text-align: center;
+    }
+
+    .recebe-card .icon { font-size: 32px; display: block; margin-bottom: 0.6rem; }
+    .recebe-card h3 { font-size: 14px; font-weight: 800; }
+    .recebe-card p { font-size: 12px; color: rgba(255,255,255,0.8); margin-top: 0.3rem; line-height: 1.5; }
+
+    /* ── ANTES DEPOIS ── */
+    .antes-depois {
+      padding: 0 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .fotos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .foto-wrap {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .foto-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+    }
+
+    .foto-tag {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .foto-tag.antes { background: rgba(80,80,80,0.8); }
+    .foto-tag.depois { background: linear-gradient(90deg, rgba(168,85,247,0.9), rgba(236,72,153,0.9)); }
+
+    /* ── SOBRE ── */
+    .sobre {
+      padding: 0 1.5rem;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .sobre-box {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 24px;
+      padding: 2rem 1.8rem;
+    }
+
+    .sobre-box p {
+      font-size: 14px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 1rem;
+    }
+
+    .sobre-name {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-final {
+      text-align: center;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .cta-box {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .cta-box p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── WHATSAPP FLUTUANTE ── */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      transition: transform 0.2s;
+      z-index: 100;
+      font-size: 28px;
+    }
+
+    .whatsapp-btn:hover { transform: scale(1.1); }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    footer a { color: white; font-weight: 700; text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .recebe-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="logo">PROJETO 3D<span>30 DIAS</span></span>
+    <span class="handle">@lilvieira</span>
+    <h1 class="hero-title">Transforme sua rotina em 30 dias — com leveza e consistência</h1>
+    <p class="hero-sub">O desafio que vai te tirar da procrastinação e te aproximar da sua melhor versão, sem abrir mão de quem você é.</p>
+
+    <!-- CONTADOR -->
+    <div class="countdown-wrap">
+      <p class="countdown-label">⏳ Oferta especial termina em</p>
+      <div class="countdown-boxes">
+        <div class="cd-box"><span class="cd-num" id="cd-d">07</span><span class="cd-unit">dias</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-box"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">horas</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-box"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">min</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-box"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">seg</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA PRINCIPAL -->
+  <section class="cta-section">
+    <p class="price-old">De R$20,00</p>
+    <p class="price-new">R$12,99</p>
+    <p class="price-sub">pagamento único • acesso imediato</p>
+    <a href="#" class="btn-comprar">🔥 Quero começar agora</a>
+    <p class="garantia-txt">🔒 Compra segura • Acesso liberado na hora</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PARA QUEM É -->
+  <section class="para-quem">
+    <p class="section-title">Este desafio é pra você que...</p>
+    <div class="check-list">
+      <div class="check-item"><span class="emoji">✅</span> Quer criar hábitos saudáveis mas não sabe por onde começar</div>
+      <div class="check-item"><span class="emoji">✅</span> Já tentou mil dietas e treinos mas não conseguiu manter</div>
+      <div class="check-item"><span class="emoji">✅</span> Quer resultados sem abrir mão do pão, chocolate ou da balada</div>
+      <div class="check-item"><span class="emoji">✅</span> Busca equilíbrio e liberdade alimentar com resultado real</div>
+      <div class="check-item"><span class="emoji">✅</span> Quer evoluir no seu ritmo, seja iniciante ou avançada</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- O QUE VOCÊ RECEBE -->
+  <section class="recebe">
+    <p class="section-title">O que você recebe</p>
+    <div class="recebe-grid">
+      <div class="recebe-card">
+        <span class="icon">🏃‍♀️</span>
+        <h3>Treino Iniciante</h3>
+        <p>Perfeito pra quem está começando do zero</p>
+      </div>
+      <div class="recebe-card">
+        <span class="icon">🔥</span>
+        <h3>Treino Intermediário</h3>
+        <p>Para quem já tem alguma experiência</p>
+      </div>
+      <div class="recebe-card">
+        <span class="icon">⚡</span>
+        <h3>Treino Avançado</h3>
+        <p>Para quem quer se desafiar de verdade</p>
+      </div>
+      <div class="recebe-card">
+        <span class="icon">🥗</span>
+        <h3>Guia de Receitas</h3>
+        <p>Alimentação equilibrada e gostosa</p>
+      </div>
+      <div class="recebe-card">
+        <span class="icon">✅</span>
+        <h3>Guia de Hábitos</h3>
+        <p>Rotina que funciona de verdade</p>
+      </div>
+      <div class="recebe-card">
+        <span class="icon">💎</span>
+        <h3>Desafio Glow Up</h3>
+        <p>Sua transformação em 30 dias</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ANTES E DEPOIS -->
+  <section class="antes-depois">
+    <p class="section-title">Resultado real</p>
+    <div class="fotos-grid">
+      <div class="foto-wrap">
+        <img src="IMG_20240725_215315.jpg" alt="Antes">
+        <div class="foto-tag antes">Antes</div>
+      </div>
+      <div class="foto-wrap">
+        <img src="IMG_6855.jpg" alt="Depois">
+        <div class="foto-tag depois">Depois ✨</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SOBRE MIM -->
+  <section class="sobre">
+    <p class="section-title">Quem é a Lil?</p>
+    <div class="sobre-box">
+      <p>Oi, diva! ♡ Eu sou <strong>Larissa Vieira</strong>, criadora de conteúdo fitness e treinadora esportiva em formação.</p>
+      <p>Sempre acreditei que o universo fitness vai muito além de treinos e alimentação — trata-se de cuidar de si mesma, fortalecer sua autoconfiança e encontrar prazer nesse processo.</p>
+      <p>Criei este projeto de 30 dias para te mostrar que pequenas escolhas diárias podem mudar completamente a forma como você se vê, como se sente e como vive.</p>
+      <span class="sobre-name">LILVIEIRA 🤍</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="cta-box">
+      <h2>Pronta pra começar sua transformação? 💪</h2>
+      <p>Por apenas <strong>R$12,99</strong> você acessa tudo e começa hoje mesmo.</p>
+      <a href="#" class="btn-comprar">🔥 Quero começar agora</a>
+      <p style="font-size:12px; margin-top:0.8rem; color:rgba(255,255,255,0.6);">🔒 Compra segura • Acesso imediato</p>
+    </div>
+  </section>
+
+  <!-- WHATSAPP FLUTUANTE -->
+  <a href="https://wa.me/55SEU_NUMERO" target="_blank" class="whatsapp-btn" title="Fale comigo no WhatsApp">💬</a>
+
+  <footer>
+    <a href="https://instagram.com/lilvieira" target="_blank">@lilvieira</a> · Projeto 30 Dias
+  </footer>
+
+  <script>
+    // CONTADOR — defina aqui a data de encerramento da oferta
+    // Formato: 'AAAA-MM-DDTHH:MM:SS'
+    var dataFim = new Date();
+    dataFim.setDate(dataFim.getDate() + 7); // 7 dias a partir de hoje
+
+    function atualizarContador() {
+      var agora = new Date().getTime();
+      var fim = dataFim.getTime();
+      var diff = fim - agora;
+
+      if (diff <= 0) {
+        document.getElementById('cd-d').textContent = '00';
+        document.getElementById('cd-h').textContent = '00';
+        document.getElementById('cd-m').textContent = '00';
+        document.getElementById('cd-s').textContent = '00';
+        return;
+      }
+
+      var dias  = Math.floor(diff / (1000 * 60 * 60 * 24));
+      var horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      var segs  = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-d').textContent = String(dias).padStart(2,'0');
+      document.getElementById('cd-h').textContent = String(horas).padStart(2,'0');
+      document.getElementById('cd-m').textContent = String(mins).padStart(2,'0');
+      document.getElementById('cd-s').textContent = String(segs).padStart(2,'0');
+    }
+
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
+  </script>
+
+</body>
+</html>
