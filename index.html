@@ -55,17 +55,8 @@
       text-shadow: 3px 3px 0 rgba(180,80,180,0.4);
     }
 
-    .lock-box h2 {
-      font-size: 16px;
-      font-weight: 800;
-      margin: 1.2rem 0 0.4rem;
-    }
-
-    .lock-box p {
-      font-size: 13px;
-      color: rgba(255,255,255,0.8);
-      margin-bottom: 1.5rem;
-    }
+    .lock-box h2 { font-size: 16px; font-weight: 800; margin: 1.2rem 0 0.4rem; }
+    .lock-box p { font-size: 13px; color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; }
 
     .lock-input {
       width: 100%;
@@ -111,10 +102,7 @@
       display: none;
     }
 
-    /* CONTEÚDO PRINCIPAL */
-    #content {
-      display: none;
-    }
+    #content { display: none; }
 
     .hero {
       text-align: center;
@@ -280,21 +268,49 @@
       padding: 2rem 1.8rem;
     }
 
-    .sobre-greeting { font-size: 22px; margin-bottom: 1rem; display: block; }
+    .sobre-greeting { font-size: 22px; margin-bottom: 1.5rem; display: block; }
 
-    .fotos-grid {
+    /* ANTES E DEPOIS */
+    .fotos-antes-depois {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin: 0 0 1.5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 0 0 1.8rem;
     }
 
-    .fotos-grid img {
+    .foto-wrapper {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .foto-wrapper img {
       width: 100%;
       aspect-ratio: 3/4;
       object-fit: cover;
-      border-radius: 14px;
-      border: 2px solid rgba(255,255,255,0.3);
+      display: block;
+    }
+
+    .foto-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .foto-label.antes {
+      background: rgba(100, 100, 100, 0.75);
+    }
+
+    .foto-label.depois {
+      background: linear-gradient(90deg, rgba(168,85,247,0.85), rgba(236,72,153,0.85));
     }
 
     .sobre-box p {
@@ -373,7 +389,6 @@
 
     @media (max-width: 500px) {
       .treinos-grid { grid-template-columns: repeat(2, 1fr); }
-      .fotos-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -392,7 +407,7 @@
     </div>
   </div>
 
-  <!-- CONTEÚDO PRINCIPAL -->
+  <!-- CONTEÚDO -->
   <div id="content">
 
     <section class="hero">
@@ -465,11 +480,18 @@
       <p class="section-title">Sobre mim</p>
       <div class="sobre-box">
         <span class="sobre-greeting">Oi, diva! ♡</span>
-        <div class="fotos-grid">
-          <img src="IMG_20240724_214110.jpg" alt="Larissa na academia">
-          <img src="IMG_6855.jpg" alt="Larissa na academia">
-          <img src="IMG_20240725_215315.jpg" alt="Larissa na academia">
+
+        <div class="fotos-antes-depois">
+          <div class="foto-wrapper">
+            <img src="IMG_20240725_215315.jpg" alt="Antes">
+            <div class="foto-label antes">Antes</div>
+          </div>
+          <div class="foto-wrapper">
+            <img src="IMG_6855.jpg" alt="Depois">
+            <div class="foto-label depois">Depois ✨</div>
+          </div>
         </div>
+
         <p>Eu sou Larissa Vieira, criadora de conteúdo fitness e treinadora esportiva em formação. Meu trabalho gira em torno da autenticidade, da estética e, principalmente, da conexão real com o público.</p>
         <p>Sempre acreditei que o universo fitness vai muito além de treinos e alimentação — trata-se de cuidar de si mesma, fortalecer sua autoconfiança e encontrar prazer nesse processo.</p>
         <p>Para dar o primeiro passo, criei este projeto de 30 dias com o objetivo de formar um novo hábito. Bem-vinda ao seu novo começo.</p>
@@ -505,12 +527,6 @@
             <span>É tipo academia online?</span><span class="faq-arrow">&#8964;</span>
           </button>
           <div class="faq-body">Não. É um plano completo com nutrição, treino, mentalidade e suporte — feito pra quem quer mudança visível e leve.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-btn" onclick="toggleFaq(this)">
-            <span>Tem garantia?</span><span class="faq-arrow">&#8964;</span>
-          </button>
-          <div class="faq-body">Sim! Oferecemos garantia de satisfação.</div>
         </div>
       </div>
     </section>
