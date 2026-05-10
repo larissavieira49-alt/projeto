@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bem-vinda, Diva! | Projeto 30 Dias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Paytone+One&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(160deg, #b39ddb 0%, #ce93d8 25%, #f48fb1 60%, #ffb6c1 100%);
+      min-height: 100vh;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 28px;
+      padding: 3rem 2rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      animation: fadeUp 0.5s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .confetti { font-size: 48px; margin-bottom: 1rem; display: block; }
+
+    .logo {
+      font-family: 'Paytone One', sans-serif;
+      font-size: 32px;
+      line-height: 1;
+      -webkit-text-stroke: 2px white;
+      color: transparent;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .logo span {
+      display: block;
+      font-size: 42px;
+      color: white;
+      -webkit-text-stroke: 0;
+      text-shadow: 3px 3px 0 rgba(180,80,180,0.4);
+    }
+
+    .titulo {
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 900;
+      margin: 1.5rem 0 0.8rem;
+      line-height: 1.3;
+    }
+
+    .sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .divider {
+      width: 70%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      margin: 0 auto 2rem;
+    }
+
+    .instrucoes {
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .instrucoes h3 {
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .passo {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .passo-num {
+      background: white;
+      color: #a21caf;
+      font-weight: 900;
+      font-size: 14px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .passo p { font-size: 14px; line-height: 1.5; }
+    .passo strong { font-weight: 900; }
+
+    /* SENHA BOX */
+    .senha-box {
+      background: linear-gradient(135deg, rgba(168,85,247,0.4), rgba(236,72,153,0.4));
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 16px;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .senha-label {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 0.4rem;
+    }
+
+    .senha-valor {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .btn-acessar {
+      display: inline-block;
+      background: white;
+      color: #a21caf;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 17px;
+      padding: 15px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .btn-acessar:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 30px rgba(168,85,247,0.4);
+    }
+
+    .btn-insta {
+      display: block;
+      background: linear-gradient(90deg, #a855f7, #ec4899);
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+
+    .btn-insta:hover { opacity: 0.88; }
+
+    .rodape {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <span class="confetti">🎉</span>
+
+    <span class="logo">PROJETO 3D<span>30 DIAS</span></span>
+
+    <h1 class="titulo">Bem-vinda, diva! Sua compra foi confirmada ✨</h1>
+    <p class="sub">Estamos muito felizes em ter você aqui. Agora é hora de começar sua transformação!</p>
+
+    <div class="divider"></div>
+
+    <div class="instrucoes">
+      <h3>Como acessar seu conteúdo</h3>
+
+      <div class="passo">
+        <div class="passo-num">1</div>
+        <p>Clique no botão <strong>"Acessar o Projeto"</strong> abaixo para ir até a área exclusiva.</p>
+      </div>
+
+      <div class="passo">
+        <div class="passo-num">2</div>
+        <p>Digite a senha exclusiva abaixo quando solicitado:</p>
+      </div>
+    </div>
+
+    <div class="senha-box">
+      <p class="senha-label">🔑 Sua senha de acesso</p>
+      <p class="senha-valor">Diva*123*aviD</p>
+    </div>
+
+    <a href="https://larissavieira49-alt.github.io/projeto30dias/" class="btn-acessar">
+      ✨ Acessar o Projeto 30 Dias
+    </a>
+
+    <a href="https://instagram.com/lilvieira" target="_blank" class="btn-insta">
+      📸 Me siga no Instagram @lilvieira
+    </a>
+
+    <p class="rodape">Guarde sua senha em um lugar seguro. Dúvidas? Fale comigo no Instagram ♡</p>
+  </div>
+
+</body>
+</html>
